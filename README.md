@@ -216,3 +216,17 @@ Current decision:
 screenshots are intentionally not committed
 screenshot generation is blocked until snippets are sanitized
 next recommended release: v0.1.3-snippet-sanitizer
+
+<!-- PUSH_STATUS_SUMMARY_LINK -->
+Push Status Summary
+
+The current pushed/not-pushed state is documented here:
+
+docs/PUSH_STATUS_SUMMARY.md
+
+Current decision:
+
+documentation is pushed
+screenshots are intentionally not pushed
+screenshot generation remains blocked until snippets are sanitized
+next technical release: v0.1.3-snippet-sanitizer
