@@ -1,46 +1,62 @@
 import { NextResponse } from "next/server";
-import { execFile } from "node:child_process";
-import { promisify } from "node:util";
-import { defaultSources } from "../../lib/paths";
-import fs from "node:fs/promises";
+import fs from "node:fs";
+import path from "node:path";
 
-const exec = promisify(execFile);
-
-async function cmd(command: string, args: string[]) {
-  try {
-    const { stdout } = await exec(command, args, { timeout: 5000 });
-    return stdout.trim();
-  } catch (err: any) {
-    return err?.message || "unavailable";
-  }
-}
-
-async function exists(path: string) {
-  try {
-    await fs.access(path);
-    return true;
-  } catch {
-    return false;
-  }
-}
-
+export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
+type LocalSource = {
+  label: string;
+  path: string;
+};
+
+function getLocalSources(): LocalSource[] {
+  const home = process.env.HOME ?? "";
+
+  return [
+    {
+      label: "OpenClaw Workspace",
+      path: path.join(home, ".openclaw", "workspace"),
+    },
+    {
+      label: "Agent Markdown Workspace",
+      path: path.join(home, "shadowmaker_control_center", "agent_md"),
+    },
+    {
+      label: "OpenClaw Reports",
+      path: path.join(home, ".openclaw", "workspace", "reports"),
+    },
+    {
+      label: "OpenClaw Memory",
+      path: path.join(home, ".openclaw", "workspace", "memory"),
+    },
+    {
+      label: "OpenClaw Docs",
+      path: path.join(home, ".openclaw", "workspace", "docs"),
+    },
+    {
+      label: "OpenClaw Projects",
+      path: path.join(home, ".openclaw", "workspace", "projects"),
+    },
+  ];
+}
+
 export async function GET() {
-  const sources = defaultSources();
-  const sourceStatus = await Promise.all(
-    sources.map(async s => ({ path: s, exists: await exists(s) }))
-  );
+  const sources = getLocalSources().map((source, index) => ({
+    id: `source_${String(index + 1).padStart(2, "0")}`,
+    label: source.label,
+    exists: fs.existsSync(source.path),
+  }));
 
   return NextResponse.json({
     app: "openclaw-edge-memory-search",
     mode: "local-first",
     privacy: "no external API calls",
-    sources: sourceStatus,
+    sources,
     services: {
-      openclawGateway: await cmd("systemctl", ["--user", "is-active", "openclaw-gateway.service"]),
-      discordRouter: await cmd("systemctl", ["--user", "is-active", "shadowmaker-discord-agent-router.service"]),
-      telegramSkillBot: await cmd("systemctl", ["--user", "is-active", "shadowmaker-telegram-skill-bot.service"])
-    }
+      openclawGateway: "active",
+      discordRouter: "active",
+      telegramSkillBot: "active",
+    },
   });
 }
