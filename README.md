@@ -183,3 +183,21 @@ AI governance documentation
 reproducible GitHub release workflow
 <!-- OPENCLAW_PORTFOLIO_DEMO_END -->
 
+
+<!-- SCREENSHOT_SECURITY_GATE_START -->
+Screenshot Security Gate
+
+Screenshots are intentionally blocked when the screenshot workflow detects private local-path leakage in UI output.
+
+Current safe state:
+
+latest safe documentation release: v0.1.2-demo-docs
+screenshots: not committed
+next safe step: v0.1.3-snippet-sanitizer
+
+See:
+
+docs/SCREENSHOT_SECURITY_GATE.md
+docs/PORTFOLIO_RELEASE_STATUS.md
+<!-- SCREENSHOT_SECURITY_GATE_END -->
+
