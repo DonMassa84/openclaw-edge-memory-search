@@ -1,0 +1,17 @@
+{
+  "description": "Example local sources. Runtime reads from environment or fallback paths. Do not commit private content.",
+  "sources": [
+    {
+      "name": "OpenClaw Workspace",
+      "path": "~/.openclaw/workspace",
+      "include": ["**/*.md", "**/*.txt", "**/*.json"],
+      "exclude": ["**/.env", "**/secrets/**", "**/tokens/**"]
+    },
+    {
+      "name": "Agent MD",
+      "path": "~/shadowmaker_control_center/agent_md",
+      "include": ["**/*.md"],
+      "exclude": []
+    }
+  ]
+}

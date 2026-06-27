@@ -1,0 +1,39 @@
+# Dependencies / build
+node_modules/
+.next/
+dist/
+build/
+coverage/
+*.log
+
+# Env / secrets
+.env
+.env.*
+*.key
+*.pem
+secrets.*
+secret.*
+token.*
+tokens.*
+credentials.*
+credentials.json
+
+# Private OpenClaw data
+.openclaw/
+memory/
+reports/
+raw/
+private/
+archives/
+mail/
+emails/
+exports/
+
+# Editor / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Backups
+*.backup_*

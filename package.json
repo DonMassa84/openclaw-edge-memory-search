@@ -1,0 +1,25 @@
+{
+  "name": "openclaw-edge-memory-search",
+  "version": "0.1.0",
+  "private": false,
+  "description": "Local-first Edge Memory Search for OpenClaw Mission Control. Search local Markdown memory, reports, docs, and agent files without sending private data to external APIs.",
+  "scripts": {
+    "dev": "next dev -H 127.0.0.1 -p 31337",
+    "build": "next build",
+    "start": "next start -H 127.0.0.1 -p 31337",
+    "lint": "next lint || true",
+    "doctor": "bash scripts/doctor.sh",
+    "index": "node scripts/build-index.mjs",
+    "safe-scan": "bash scripts/safe-scan.sh"
+  },
+  "dependencies": {
+    "@types/node": "latest",
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "next": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "typescript": "latest"
+  },
+  "devDependencies": {}
+}
