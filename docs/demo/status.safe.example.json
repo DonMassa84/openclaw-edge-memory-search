@@ -1,0 +1,18 @@
+{
+  "app": "openclaw-edge-memory-search",
+  "mode": "local-first",
+  "privacy": "no external API calls",
+  "sources": [
+    { "id": "source_01", "label": "OpenClaw Workspace", "exists": true },
+    { "id": "source_02", "label": "Agent Markdown Workspace", "exists": true },
+    { "id": "source_03", "label": "OpenClaw Reports", "exists": true },
+    { "id": "source_04", "label": "OpenClaw Memory", "exists": true },
+    { "id": "source_05", "label": "OpenClaw Docs", "exists": true },
+    { "id": "source_06", "label": "OpenClaw Projects", "exists": true }
+  ],
+  "services": {
+    "openclawGateway": "active",
+    "discordRouter": "active",
+    "telegramSkillBot": "active"
+  }
+}
