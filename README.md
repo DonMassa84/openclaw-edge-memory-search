@@ -201,3 +201,18 @@ docs/SCREENSHOT_SECURITY_GATE.md
 docs/PORTFOLIO_RELEASE_STATUS.md
 <!-- SCREENSHOT_SECURITY_GATE_END -->
 
+
+<!-- FINAL_PROJECT_STATUS_LINK -->
+Final Project Status
+
+The current safe project status is documented here:
+
+docs/FINAL_PROJECT_STATUS.md
+docs/SCREENSHOT_SECURITY_GATE.md
+docs/PORTFOLIO_RELEASE_STATUS.md
+
+Current decision:
+
+screenshots are intentionally not committed
+screenshot generation is blocked until snippets are sanitized
+next recommended release: v0.1.3-snippet-sanitizer
