@@ -37,3 +37,50 @@ Thumbs.db
 
 # Backups
 *.backup_*
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+# --- Shadowmaker hygiene ---
+.env
+.env.*
+!.env.example
+node_modules/
+.venv/
+venv/
+__pycache__/
+*.pyc
+*.log
+secrets/
+*.key
+*.pem
+*.sqlite
+*.db
+
+# --- Shadowmaker standard hygiene ---
+.env
+.env.*
+!.env.example
+*.log
+*.tmp
+*.bak
+.DS_Store
+node_modules/
+dist/
+build/
+coverage/
+__pycache__/
+*.pyc
+.venv/
+venv/
+.cache/
+.local/
+reports/private/
+secrets/
+*.key
+*.pem
+*.p12
+*.crt
+*.sqlite
+*.db

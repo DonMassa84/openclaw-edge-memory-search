@@ -1,0 +1,19 @@
+name: repo-standard-ci
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  baseline:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Doctor
+        run: bash scripts/doctor.sh
+      - name: Smoke test
+        run: bash scripts/smoke-test.sh
+      - name: Security scan
+        run: bash scripts/security-scan.sh

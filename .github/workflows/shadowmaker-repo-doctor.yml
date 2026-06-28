@@ -1,0 +1,8 @@
+name: Shadowmaker Repo Doctor
+on: [push, pull_request, workflow_dispatch]
+jobs:
+  doctor:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: bash scripts/shadowmaker-repo-doctor.sh
