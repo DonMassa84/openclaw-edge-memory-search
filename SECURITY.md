@@ -1,30 +1,30 @@
+# Security Policy
 
-Security Policy
-Local-first rule
+## Local-first boundary
 
-Private OpenClaw data stays on the user's device.
+`DonMassa84/openclaw-edge-memory-search` contains only sanitized source code and documentation. Private operational evidence remains local.
 
-Forbidden in Git
+## Never commit
 
-Never commit:
+- passwords, API keys, access tokens or credentials
+- private PDFs, emails, screenshots or message archives
+- identity, authority, housing, finance or health documents
+- raw local agent state, sessions, logs or vector databases
+- absolute local filesystem paths
+- unsanitized training data or USB contents
 
-.env
-API keys
-tokens
-passwords
-raw PDFs
-raw screenshots
-financial files
-health files
-government/authority correspondence
-housing documents
-private logs
-Runtime boundaries
+## Hugging Face
 
-The app reads from configured local paths only. It should not upload or transmit indexed content.
+Only dedicated synthetic exports may be uploaded. A fine-grained token must be limited to the intended repository and must never be stored in Git, documentation, logs or shell history.
 
-External APIs
+## Required check
 
-No external AI APIs are used in the MVP.
+Before publishing or opening a release:
 
-Hosted playgrounds such as MiniMax, Groq, LM Arena, Google Colab, Kaggle, or HuggingFace Spaces may be used only with synthetic or sanitized examples, never with raw private data.
+```bash
+bash scripts/repo-agent-check.sh
+git diff --check
+git status --short
+```
+
+Human review is required before every external publication.

@@ -1,51 +1,39 @@
 #!/usr/bin/env bash
 set -Eeuo pipefail
 
-REPO_ROOT="$(git rev-parse --show-toplevel 2>/dev/null || pwd)"
-cd "$REPO_ROOT"
+ROOT="$(git rev-parse --show-toplevel 2>/dev/null || pwd)"
+cd "$ROOT"
 
-TS="$(date +%Y-%m-%d_%H%M%S)"
-OUT="docs/agent/snapshots"
-mkdir -p "$OUT"
+stamp="$(date +%Y-%m-%d_%H%M%S)"
+out=".local/repo-agent/snapshots"
+mkdir -p "$out"
+target="$out/REPO_SNAPSHOT_$stamp.md"
 
-SNAP="$OUT/REPO_SNAPSHOT_$TS.md"
+{
+  echo "# Local Repository Snapshot"
+  echo
+  echo "Generated: $stamp"
+  echo
+  echo "## Branch"
+  echo
+  git branch --show-current || true
+  echo
+  echo "## Status"
+  echo
+  git status --short || true
+  echo
+  echo "## Recent commits"
+  echo
+  git log --oneline -5 2>/dev/null || true
+  echo
+  echo "## Agent check"
+  echo
+  if bash scripts/repo-agent-check.sh; then
+    echo "PASS"
+  else
+    echo "REVIEW_REQUIRED"
+  fi
+} > "$target"
 
-cat > "$SNAP" <<SNAPEOF
-# Repo Snapshot
-
-Stand: $TS
-
-Repo:
-\`\`\`text
-$REPO_ROOT
-\`\`\`
-
-## Git status
-
-\`\`\`text
-$(git status --short || true)
-\`\`\`
-
-## Last commits
-
-\`\`\`text
-$(git log --oneline -5 2>/dev/null || true)
-\`\`\`
-
-## Diff stat
-
-\`\`\`text
-$(git diff --stat || true)
-\`\`\`
-
-## Agent Check
-
-Run manually:
-
-\`\`\`bash
-bash scripts/repo-agent-check.sh
-\`\`\`
-
-SNAPEOF
-
-echo "[OK] Snapshot written: $SNAP"
+chmod 600 "$target"
+echo "SNAPSHOT=$target"

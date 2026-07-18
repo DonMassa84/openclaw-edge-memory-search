@@ -1,138 +1,43 @@
-# Repo Agent System
+# Repository Agent System
 
-Stand: 2026-06-28_010340
+Status: 2026-07-18
+Repository: `DonMassa84/openclaw-edge-memory-search`
+Class: `OPENCLAW_EDGE_SEARCH`
 
-Repo:
-```text
-/home/schattenmacher/projects/openclaw-edge-memory-search
-```
+## Purpose
 
-Class:
-```text
-P1_OPENCLAW_SNIPPET_SANITIZER
-```
+This repository is a sanitized GitHub projection of a local-first system. The local Agent State Hub and DokumentenSystem remain the control plane and source of operational truth.
 
-## 1. Situation
+## Layer boundaries
 
-This repo is now managed by the Shadowmaker Repo-Agent Standard.
+- Local: private documents, evidence, logs, agent state and runtime data.
+- GitHub: source code, tests, public documentation and reviewable portfolio artifacts.
+- Hugging Face: synthetic demos only when explicitly mapped in `.repo-agent.yaml`.
 
-## 2. Goal SMART
+## Guardrails
 
-Sanitize snippets, API/search outputs and portfolio screenshots against local path/secret leakage.
+- No tokens, credentials or secrets.
+- No private PDFs, emails, screenshots, account statements or authority documents.
+- No absolute machine-specific paths in tracked output.
+- No raw local agent memory, sessions or logs.
+- No automatic push, release, upload, message or webhook from the local status synchronizer.
+- Repository changes use a review branch and pull request.
+- Hugging Face exports are allowlisted and synthetic.
 
-Every change must be small, reviewable, documented and safe for local/portfolio use.
+## Working sequence
 
-## 3. Stakeholders
+1. Read `.repo-agent.yaml` and the local status dashboard.
+2. Isolate one repository task.
+3. Make a small, reviewable change.
+4. Run `bash scripts/repo-agent-check.sh`.
+5. Review the diff and generated artifacts.
+6. Commit to a branch and open a pull request.
+7. Publish or release only after human review.
 
-- Operator: Daniel / Schattenmacher
-- Repo-Agent: local check and documentation layer
-- Git: version control only
-- GitHub / Portfolio: only after sanitizing and Human Review
+## Local snapshot
 
-## 4. Causes
+Run `bash scripts/repo-agent-snapshot.sh`. Snapshots are written below `.local/` and must not be committed.
 
-### Human
-Multiple repos create context switching and operational drift.
+## Repository-specific boundary
 
-### Organization
-Tasks are distributed across chats, reports and local folders.
-
-### Process
-Without a standard, every repo is handled differently.
-
-## 5. Alternatives
-
-### A — Manual review only
-Too slow.
-
-### B — One-off repo scripts
-Useful but inconsistent.
-
-### C — Standardized Repo-Agent
-Chosen.
-
-## 6. Evaluation
-
-### Economic
-Reduces repeated manual setup.
-
-### Human
-Lowers cognitive load.
-
-### Organizational
-Creates one shared pattern across all repos.
-
-## 7. Decision + Justification
-
-Decision:
-Use the 6-component agent model for every repo.
-
-Justification:
-The repo is an operational artifact, not just a folder. It needs memory, guardrails, mini-tests and review checkpoints.
-
-## 8. Implementation
-
-### Model
-Technical repo-agent.
-
-### Tools
-- git
-- bash
-- grep
-- repo-local scripts
-- optional: gh CLI
-
-### Memory
-Use repo docs, status, release history and known project context.
-
-### Audio
-Only used if audio/video/transcripts are explicitly part of the repo workflow.
-
-### Guardrails
-- No secrets
-- No tokens
-- No local private paths in public output
-- No raw private data
-- No push without review
-- No release without release-proof
-- No screenshots before leak check
-
-### Orchestration
-1. Status prüfen
-2. Aufgabe isolieren
-3. Mini-Test definieren
-4. Änderung klein halten
-5. Check ausführen
-6. Diff prüfen
-7. Human Review
-8. Commit
-9. Optional Push/Release
-
-## 9. Control
-
-Run:
-
-```bash
-bash scripts/repo-agent-check.sh
-bash scripts/repo-agent-snapshot.sh
-git diff --stat
-git diff --check
-git status --short
-```
-
-## 10. Sustainability & Communication
-
-Every future repo task must be written in this structure:
-
-```text
-Situation
-Goal SMART
-Stakeholders
-Causes
-Alternatives
-Evaluation
-Decision
-Implementation
-Control
-Sustainability & Communication
-```
+The public Space receives synthetic data from an allowlisted export only.

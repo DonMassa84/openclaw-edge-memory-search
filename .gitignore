@@ -84,3 +84,19 @@ secrets/
 *.crt
 *.sqlite
 *.db
+# --- Local Agent State Hub boundary ---
+.local/
+.next/
+node_modules/
+__pycache__/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+docs/agent/snapshots/
+hf-export/private/
+agent-state/
+*.local.env
+*.token
+*.kdbx
+*.p12
+*.pfx
